@@ -17,7 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('AdminPage/')}}/css/sb-admin-2.min.css" rel="stylesheet">
-
+    @toastr_css
 </head>
 <body class="bg-gradient-primary">
 <div class="container">
@@ -38,7 +38,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Hoşgeldin!</h1>
                                 </div>
 
-                                <form class="user" method="post" action="">
+                                <form class="user" method="post" action="{{route('login.dashboard')}}">
                                     @csrf
                                     <div class="form-group">
                                         <input type="email"  name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email">
@@ -79,7 +79,9 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{{asset('AdminPage/')}}/js/sb-admin-2.min.js"></script>
-
+@jquery
+@toastr_js
+@toastr_render
 </body>
 
 </html>
