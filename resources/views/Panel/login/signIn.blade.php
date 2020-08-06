@@ -41,10 +41,10 @@
                                 <form class="user" method="post" action="{{route('login.dashboard')}}">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="email"  name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email">
+                                        <input type="email"  name="email" class="form-control form-control-user" id="exampleInputEmail" required aria-describedby="emailHelp" placeholder="Email">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password"  class="form-control form-control-user" id="exampleInputPassword" placeholder="Şifre">
+                                        <input type="password" name="password"  class="form-control form-control-user" required id="exampleInputPassword" placeholder="Şifre">
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
