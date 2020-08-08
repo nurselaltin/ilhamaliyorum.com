@@ -96,7 +96,6 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{route('create.book')}}">Ekle</a>
                     <a class="collapse-item" href="{{route('book')}}">Görüntüle</a>
-                    <a class="collapse-item" href="{{route('edit.book')}}">Düzenle</a>
                 </div>
             </div>
         </li>
@@ -109,7 +108,6 @@
             <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="buttons.html">Görüntüle</a>
-                    <a class="collapse-item" href="buttons.html">Düzenle</a>
                 </div>
             </div>
         </li>

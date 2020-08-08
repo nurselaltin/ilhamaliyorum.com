@@ -5,8 +5,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><span> makale bulundu</span>
-                <a href="" class="btn btn-warning btn-sm"><i class="fa fa-trash">Silinen Kitaplar</i></a>
+            <h6 class="m-0 font-weight-bold text-primary"><span> </span>
             </h6>
         </div>
         <div class="card-body">
@@ -19,7 +18,8 @@
                         <th>Kitap Adı</th>
                         <th>Açıklama</th>
                         <th>Yazar</th>
-                        <th>Tarih</th>
+                        <th>Eklenme Tarihi</th>
+                        <th>Güncellenme Tarihi</th>
                         <th>Durum</th>
                         <th>İşlemler</th>
                     </tr>
@@ -30,22 +30,42 @@
                         <tr>
                             <td><img src="{{$book->img_url}}" width="200"></td>
                             <td>{{$book->category}}</td>
-                            <td>{{$book->title}}</td>
+                            <td id="title">{{$book->title}}</td>
                             <td>{{$book->description}}</td>
                             <td>{{$book->writer_fullname}}</td>
                             <td>{{$book->created_at->diffForHumans()}}</td>
+                            <td>{{$book->updated_at->diffForHumans()}}</td>
                             <td>
                                 <input  class="switch" type="checkbox"  @if($book->is_active == 1) checked @endif  data-on="Aktif"   book-id="{{$book->id}}"  data-off="Pasif"  data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-class="fast">
                             </td>
                             <td>
                                 <a target="_blank" href=""  title="Görüntüle" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                                <a href="" title="Düzenle" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
-                                <a href="" title="Sil" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                                <a href="{{route('edit.book',$book->id)}}" title="Düzenle" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
+                                <a book-id="{{$book->id}}" book-title="{{$book->title}}"  class="btn btn-sm btn-danger text-white remove-click" title="Kitabı Sil"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="removeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -59,14 +79,17 @@
       $(function () {
           $('.switch').change(function () {
               id = $(this)[0].getAttribute('book-id');
-              isActive = $(this).prop(checked);
+              isActive = $(this).prop('checked');
               //get metoduyla veriyi controller gönder
               $.get( "{{route('switch.book')}}",{id:id,isActive:isActive}, function( data ) {
                   console.log(data);
               });
 
           });
+          $('.remove-click').click(function () {
+               $('#removeModal').modal();
 
+          });
       })
     </script>
 @endsection
