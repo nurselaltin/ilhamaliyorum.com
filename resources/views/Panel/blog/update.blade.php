@@ -5,37 +5,34 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form method="post" action="{{route('update.book',$book->id)}}" enctype="multipart/form-data" >
+            <form method="post" action="{{route('update.blog',$blog->id)}}" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-group">
-                    <label>Kitap Adı</label>
-                    <input type="text" name="title" class="form-control" required value="{{$book->title}}"/>
+                    <label>Başlık</label>
+                    <input type="text" name="title" class="form-control" required value="{{$blog->title}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Yazar</label>
-                    <input type="text" name="writer" class="form-control" required value="{{$book->writer_fullname}}"/>
-                </div>
-                <div class="form-group">
-                    <label>Kitap Kategori</label>
+                    <label>Kategori</label>
                     <select name="category" class="form-control" required>
                         <option value="">Seçim Yapınız</option>
                         @foreach($categories as $category )
-                            <option @if($book->$category == $category->id) selected @endif value="{{$category->id}}">{{$category->title}}</option>
+                            <option @if($blog->$category == $category->id) selected @endif value="{{$category->id}}">{{$category->title}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Kitap Fotoğrafı</label></br>
-                    <img src="{{asset($book->img_url)}}" class="img-thumbnail rounded" width="200">
+                    <label>Kapak Fotoğrafı</label>
+                     </br>
+                    <img src="{{asset($blog->img_url)}}" class="img-thumbnail rounded" width="200">
                     </br>
                     <input type="file" name="image" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Makale İçeriği</label>
-                    <textarea name="description"  id="editor" class="form-control"  rows="5">{{$book->description}}</textarea>
+                    <label>İçerik</label>
+                    <textarea name="description"  id="editor" class="form-control"  rows="5">{{$blog->description}}</textarea>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Kitap Güncelle</button>
+                    <button type="submit" class="btn btn-primary btn-block">Güncelle</button>
                 </div>
             </form>
         </div>

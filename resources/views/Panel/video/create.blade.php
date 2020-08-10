@@ -5,37 +5,35 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form method="post" action="{{route('update.book',$book->id)}}" enctype="multipart/form-data" >
+            <form method="post" action="{{route('add.book')}}" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-group">
                     <label>Kitap Adı</label>
-                    <input type="text" name="title" class="form-control" required value="{{$book->title}}"/>
+                    <input type="text" name="title" class="form-control" required/>
                 </div>
                 <div class="form-group">
                     <label>Yazar</label>
-                    <input type="text" name="writer" class="form-control" required value="{{$book->writer_fullname}}"/>
+                    <input type="text" name="writer" class="form-control" required/>
                 </div>
                 <div class="form-group">
                     <label>Kitap Kategori</label>
                     <select name="category" class="form-control" required>
                         <option value="">Seçim Yapınız</option>
                         @foreach($categories as $category )
-                            <option @if($book->$category == $category->id) selected @endif value="{{$category->id}}">{{$category->title}}</option>
+                            <option value="{{$category->id}}">{{$category->title}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Kitap Fotoğrafı</label></br>
-                    <img src="{{asset($book->img_url)}}" class="img-thumbnail rounded" width="200">
-                    </br>
-                    <input type="file" name="image" class="form-control">
+                    <label>Kitap Fotoğrafı</label>
+                    <input type="file" name="image" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label>Makale İçeriği</label>
-                    <textarea name="description"  id="editor" class="form-control"  rows="5">{{$book->description}}</textarea>
+                    <textarea name="description"  id="editor" class="form-control"  rows="5"></textarea>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Kitap Güncelle</button>
+                    <button type="submit" class="btn btn-primary btn-block"> Kitap Oluştur</button>
                 </div>
             </form>
         </div>

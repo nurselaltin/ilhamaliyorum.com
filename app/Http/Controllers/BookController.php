@@ -27,14 +27,14 @@ class BookController extends Controller
     public  function  add(Request $request){
 
 
-         $category=Category::findOrFail($request->category);
+
          $book = new Book();
          $book->writer_id = 4;
          $book->title = $request->title;
          $book->url = Str::slug(strtolower($request->title),'-');
          $book->description = $request->description;
          $book->writer_fullname = $request->writer;
-         $book->category= $category->title;
+         $book->category= $request->category;
          $book->is_active= 1;
          $book->public= 1;
 

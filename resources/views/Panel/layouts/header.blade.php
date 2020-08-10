@@ -79,9 +79,8 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="buttons.html">Ekle</a>
-                    <a class="collapse-item" href="buttons.html">Görüntüle</a>
-                    <a class="collapse-item" href="buttons.html">Düzenle</a>
+                    <a class="collapse-item" href="{{route('create.blog')}}">Ekle</a>
+                    <a class="collapse-item" href="{{route('blog')}}">Görüntüle</a>
                 </div>
             </div>
         </li>
@@ -107,7 +106,8 @@
             </a>
             <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="buttons.html">Görüntüle</a>
+                    <a class="collapse-item" href="">Ekle</a>
+                    <a class="collapse-item" href="{{route('video')}}">Görüntüle</a>
                 </div>
             </div>
         </li>
