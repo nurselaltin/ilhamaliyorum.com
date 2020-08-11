@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label>Profil Fotoğrafı</label>
-                    <input type="file" name="img_url" class="form-control" required>
+                    <input type="file" name="image" class="form-control" >
                 </div>
                 <div class="form-group">
                     <label>Hakkınızda</label>
