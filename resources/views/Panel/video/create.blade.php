@@ -5,18 +5,14 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form method="post" action="{{route('add.book')}}" enctype="multipart/form-data" >
+            <form method="post" action="{{route('add.video')}}" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-group">
-                    <label>Kitap Adı</label>
+                    <label>Başlık</label>
                     <input type="text" name="title" class="form-control" required/>
                 </div>
                 <div class="form-group">
-                    <label>Yazar</label>
-                    <input type="text" name="writer" class="form-control" required/>
-                </div>
-                <div class="form-group">
-                    <label>Kitap Kategori</label>
+                    <label>Video Kategori</label>
                     <select name="category" class="form-control" required>
                         <option value="">Seçim Yapınız</option>
                         @foreach($categories as $category )
@@ -25,15 +21,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Kitap Fotoğrafı</label>
-                    <input type="file" name="image" class="form-control" required>
+                    <label>Video Url</label>
+                    <input type="text" name="url" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Makale İçeriği</label>
+                    <label>Açıklama</label>
                     <textarea name="description"  id="editor" class="form-control"  rows="5"></textarea>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Kitap Oluştur</button>
+                    <button type="submit" class="btn btn-primary btn-block"> Video Oluştur</button>
                 </div>
             </form>
         </div>
