@@ -135,7 +135,7 @@
                 <div class="card-header py-3">
                     <div class="row">
                         <h6 class="m-0 font-weight-bold text-primary col-lg-2">DENEYİM</h6>
-                        <a  title-name="DENEYİM EKLE" data-toggle="modal" data-target="#ornekModal" class="experience badge badge-success col-md-1">Ekle</a>
+                        <a  href="{{route('create.experience')}}" class="badge badge-success col-md-1">Ekle</a>
                     </div>
                 </div>
                 <div class="card-body row">
@@ -149,8 +149,8 @@
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{$experience->company_name}} - {{$experience->company_sector}}</div>
                                                 <div class=" mb-0 font-weight-bold ">{{$experience->job_title}}</div>
                                                 <div class=" mb-0 font-weight-bold ">{{$experience->job_title}}</div>
-                                                <div class=" mb-0 font-weight-bold ">Başlangıç:{{$education->start_date}} </div>
-                                                <div class=" mb-0 font-weight-bold ">Bitiş:{{$education->finish_date}}</div>
+                                                <div class=" mb-0 font-weight-bold ">Başlangıç:{{$experience->start_date}} </div>
+                                                <div class=" mb-0 font-weight-bold ">Bitiş:{{$experience->finish_date}}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>

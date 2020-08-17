@@ -122,10 +122,11 @@ class ResumeController extends Controller
         $education->isActive = 1;
         $education->public = 1;
         $education->save();
+        toastr()->success('Eğitim başarıyla eklendi');
         return redirect()->back();
     }
 
-    public function  getData(Request $request){
+    public function  getDataEducation(Request $request){
 
 
         $education= Education::findOrFail($request->id);
@@ -140,6 +141,7 @@ class ResumeController extends Controller
         $education->start_date = $request->start_date;
         $education->finish_date = $request->finish_date ;
         $education->save();
+        toastr()->success('Eğitim başarıyla güncellendi.');
         return redirect()->back();
     }
 
@@ -148,6 +150,59 @@ class ResumeController extends Controller
 
          Education::findOrFail($request->id)->delete();
          toastr()->success('Eğitim başarıyla silindi');
+        return redirect()->back();
+    }
+
+    //Experience
+
+    public  function createExperience(){
+
+        $experiences = Experience::get();
+        return view('Panel.resume.create.experience',compact('experiences'));
+    }
+
+    public  function addExperience(Request $request){
+
+        $experience = new Experience();
+        $experience->company_name = $request->name;
+        $experience->company_sector = $request->sector;
+        $experience->job_title = $request->job_title;
+        $experience->writer_id= 4;
+        $experience->fullname= 'Nursel';
+        $experience->continues= 'Devam';
+        $experience->start_date = $request->start_date;
+        $experience->finish_date = $request->finish_date ;
+        $experience->isActive = 1;
+        $experience->save();
+        toastr()->success('İş deneyiminiz başarıyla eklendi.');
+        return redirect()->back();
+    }
+
+    public function  getDataExperience(Request $request){
+
+
+        $experience= Experience::findOrFail($request->id);
+        return response()->json($experience);
+    }
+
+    public  function  updateExperience(Request $request){
+        $experience = Experience::findOrFail(($request->id));
+        $experience->company_name = $request->name;
+        $experience->company_sector = $request->sector;
+        $experience->job_title = $request->job_title;
+        $experience->start_date = $request->start_date;
+        $experience->finish_date = $request->finish_date ;
+        $experience->isActive = 1;
+        $experience->save();
+        toastr()->success('İş deneyiminiz başarıyla güncellendi.');
+        return redirect()->back();
+    }
+
+    public  function  deleteExperience(Request $request){
+
+
+        Experience::findOrFail($request->id)->delete();
+        toastr()->success('İş deneyiminiz başarıyla silindi');
         return redirect()->back();
     }
 }
