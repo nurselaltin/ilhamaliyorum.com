@@ -167,7 +167,7 @@
                 <div class="card-header py-3">
                     <div class="row">
                         <h6 class="m-0 font-weight-bold text-primary col-lg-2">PROJELERİM</h6>
-                        <a title-name="PROJE EKLE" data-toggle="modal" data-target="#ornekModal" class="project badge badge-success col-md-1">Ekle</a>
+                        <a  href="{{route('create.project')}}" class="badge badge-success col-md-1">Ekle</a>
                     </div>
                 </div>
                 <div class="card-body row">

@@ -186,7 +186,7 @@ class ResumeController extends Controller
     }
 
     public  function  updateExperience(Request $request){
-        $experience = Experience::findOrFail(($request->id));
+        $experience = Experience::findOrFail($request->id);
         $experience->company_name = $request->name;
         $experience->company_sector = $request->sector;
         $experience->job_title = $request->job_title;
@@ -205,4 +205,52 @@ class ResumeController extends Controller
         toastr()->success('İş deneyiminiz başarıyla silindi');
         return redirect()->back();
     }
+
+
+    //Project
+
+    public  function createProject(){
+
+        $projects = Project::get();
+        return view('Panel.resume.create.project',compact('projects'));
+    }
+
+    public  function addProject(Request $request){
+
+        $project = new Project();
+        $project->title = $request->name;
+        $project->description = $request->description;
+        $project->category = $request->category;
+        $project->project_img_url = 'öflf';
+        $project->writer_id= 4;
+        $project->fullname= 'Nursel';
+        $project->created_at = $request->created_at;
+        $project->save();
+        toastr()->success('Projeniz başarıyla eklendi.');
+        return redirect()->back();
+    }
+
+    public function  getDataProject(Request $request){
+        $project= Project::findOrFail($request->id);
+        return response()->json($project);
+    }
+
+    public  function  updateProject(Request $request){
+        $project = Project::findOrFail($request->id);
+        $project->title = $request->name;
+        $project->description = $request->description;
+        $project->category = $request->category;
+        $project->created_at = $request->created_at;
+        $project->save();
+        toastr()->success('Projeniz başarıyla güncellendi.');
+        return redirect()->back();
+    }
+
+    public  function  deleteProject(Request $request){
+
+        Project::findOrFail($request->id)->delete();
+        toastr()->success('Projeniz başarıyla silindi');
+        return redirect()->back();
+    }
+
 }
