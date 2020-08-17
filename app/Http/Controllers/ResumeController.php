@@ -5,30 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Education;
-use App\Models\Experince;
+use App\Models\Experience;
 use App\Models\Member;
 use App\Models\Project;
+use App\Models\Reference;
 use App\Models\Writer;
-use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ResumeController extends Controller
 {
+    //Resume
     public  function  index(){
-        $writer = Writer::findOrFail(1);
-        $educations =Education::get();
-        $experinces =Experince::get();
-        $projects =Project::get();
-        $references =Reference::get();
-        return view('Panel.resume.index',compact('writer','educations','experinces','projects','references'));
-    }
 
+        $writer = Writer::find(1);
+        $educations = Education::get();
+        $projects = Project::get();
+        $references = Reference::get();
+        $experiences = Experience::get();
+        return view('Panel.resume.index',compact('writer','educations','projects','references','experiences'));
+    }
     public  function  create(){
         $member= Member::find(1);
         return view('Panel.resume.create.writer',compact('member'));
     }
-
     public  function  add(Request $request){
 
 
@@ -61,7 +61,6 @@ class ResumeController extends Controller
         return redirect()->route('dashboard');
 
     }
-
     public  function  edit($id){
 
         $writer = Book::findOrFail($id);
@@ -98,5 +97,57 @@ class ResumeController extends Controller
         $writer->is_active = $request->isActive == "true" ? 1: 0;
         $writer->save();
 
+    }
+
+
+    //Education
+
+    public  function createEducation(){
+
+        $educations = Education::get();
+        return view('Panel.resume.create.education',compact('educations'));
+    }
+
+    public  function addEducation(Request $request){
+
+        $education = new Education();
+        $education->school_name = $request->name;
+        $education->writer_id= 4;
+        $education->writer_fullname= 'Nursel';
+        $education->continues= 'Devam';
+        $education->department = $request->department;
+        $education->education_type = $request->type;
+        $education->start_date = $request->start_date;
+        $education->finish_date = $request->finish_date ;
+        $education->isActive = 1;
+        $education->public = 1;
+        $education->save();
+        return redirect()->back();
+    }
+
+    public function  getData(Request $request){
+
+
+        $education= Education::findOrFail($request->id);
+        return response()->json($education);
+    }
+
+    public  function  updateEducation(Request $request){
+        $education = Education::findOrFail($request->id);
+        $education->school_name = $request->name;
+        $education->department = $request->department;
+        $education->education_type = $request->type;
+        $education->start_date = $request->start_date;
+        $education->finish_date = $request->finish_date ;
+        $education->save();
+        return redirect()->back();
+    }
+
+    public  function  deleteEducation(Request $request){
+
+
+         Education::findOrFail($request->id)->delete();
+         toastr()->success('Eğitim başarıyla silindi');
+        return redirect()->back();
     }
 }

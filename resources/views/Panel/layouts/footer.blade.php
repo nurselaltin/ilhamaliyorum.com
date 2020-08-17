@@ -14,6 +14,7 @@
 <!-- Page level custom scripts -->
 <script src="{{asset('AdminPage')}}/js/demo/chart-area-demo.js"></script>
 <script src="{{asset('AdminPage')}}/js/demo/chart-pie-demo.js"></script>
+
 @jquery
 @toastr_js
 @toastr_render

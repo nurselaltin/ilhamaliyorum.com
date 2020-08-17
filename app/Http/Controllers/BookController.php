@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Education;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -15,6 +16,8 @@ class BookController extends Controller
     public  function  index(){
 
         $books = Book::get();
+
+
         return view('Panel.book.index',compact('books'));
     }
 
