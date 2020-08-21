@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Writer;
 use Dotenv\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Member;
+use Schema;
 class MemberController extends Controller
 {
 
@@ -18,13 +20,15 @@ class MemberController extends Controller
 
     public  function  register(Request $request){
 
+
         //Validation işlemlerini yap
         $request->validate([
             'password' => 'min:6',
             're_password' => 'same:password'
         ]);
         //Aynı bilgilere ait kullanıcı var mı kontrol et
-        $member = Member::whereEmail($request->email)->first();
+        $member = Member::where('email' , '=' , $request->email)->exists();
+
         if($member){
             toastr()->warning('Aynı bilgilere sahip başka bir kullanıcı sistemde kayıtlı!');
             return redirect()->back();
@@ -37,6 +41,16 @@ class MemberController extends Controller
             $member->isActive=1;
             $member->password=Hash::make($request->password);
             $member->save();
+            //Kullanıcı bilgilerini sessiona kaydet
+            $request->session()->put('fullname',$request->fullname);
+            $request->session()->put('email',$request->email);
+            //------------------------------------------------------
+            //Writer tablosuna da kaydet
+            $writer = new Writer();
+            $writer->fullname = $request->fullname;
+            $writer->email = $request->email;
+            $writer->save();
+            //-----------------------------------------------------
             toastr()->success('Başarıyla kayıt oldunuz!');
             return redirect()->route('login.page');
         }

@@ -70,8 +70,17 @@
             </a>
             <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{route('create.resume')}}">Ekle</a>
-                    <a class="collapse-item" href="{{route('resume')}}">Görüntüle</a>
+                    <!--
+                       App/Helpers.php ;  isResumeFill() metodu ile özgeçmiş oluşturulmuş mu onu kontrol ediyoruz.
+                    -->
+                    <?php if(isResumeFill(session()->get('email') === 1)){?>
+                        <a class="collapse-item" href="{{route('create.resume')}}">Ekle</a>
+                    <?php }else{?>
+                        <a class="collapse-item" href="{{route('resume')}}">Görüntüle</a>
+                    <?php }?>
+
+
+
                 </div>
             </div>
         </li>
@@ -84,8 +93,13 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{route('create.blog')}}">Ekle</a>
-                    <a class="collapse-item" href="{{route('blog')}}">Görüntüle</a>
+
+
+                    <?php if(isResumeFill(session()->get('email'))!= true){?>
+                        <a class="collapse-item" href="{{route('blog')}}">Görüntüle</a>
+                    <?php }else{?>
+                        <a class="collapse-item" href="{{route('create.blog')}}">Ekle</a>
+                        <?php }?>
                 </div>
             </div>
         </li>

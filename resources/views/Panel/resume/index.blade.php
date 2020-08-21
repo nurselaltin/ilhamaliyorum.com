@@ -63,11 +63,16 @@
     <div class="card-body">
         <div class="table-responsive">
             <div>
-                <input  class="switch text-right" type="checkbox"  @if($writer->is_active == 1) checked @endif  data-on="Yayında"   book-id="{{$writer->id}}"  data-off="Pasif"  data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-class="fast"/>
+                <input  class="resume_is_active text-right" type="checkbox"  @if($writer->is_active == 1) checked @endif  data-on="Yayında"   book-id="{{$writer->id}}"  data-off="Pasif"  data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-class="fast"/>
             </div>
             <div class="text-center mb-4">
                 <img src="{{$writer->img_url}}" class="rounded-circle" width="200px" height="200px" alt="...">
                 <div class="card mb-4">
+                    <div class="row">
+                        <div class="font-weight-bold text-primary text-center m-3">
+                            <span>Genel Bilgiler</span>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <p class="text-center">{{$writer->fullname}}</p>
                         <p class="text-center">{{$writer->email}}</p>
@@ -197,7 +202,7 @@
                 <div class="card-header py-3">
                     <div class="row">
                         <h6 class="m-0 font-weight-bold text-primary col-lg-2">REFERANSLARIM</h6>
-                        <a href="#" class="badge badge-success col-md-1">Ekle</a>
+                        <a href="{{route('create.reference')}}" class="badge badge-success col-md-1">Ekle</a>
                     </div>
                 </div>
                 <div class="card-body row">
@@ -208,9 +213,10 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{$reference->fuulname}} - {{$reference->phone}}</div>
-                                                <div class="h5 mb-0 font-weight-bold ">{{$reference->email}}</div>
-                                                <p class=" mb-0 font-weight-bold ">{{$reference->comment_about_writer}}</p>
+                                                <div class=" mb-0 font-weight-bold text-primary text-uppercase mb-1">{{$reference->fullname}}</div>
+                                                <div class=" mb-0 font-weight-bold ">{{$reference->email}} {{$reference->phone}}</div>
+                                                <div class=" mb-0 font-weight-bold ">{{$reference->comment_about_writer}}</div>
+                                                <p class=" mb-0 font-weight-bold ">{{$reference->description}}</p>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -234,5 +240,17 @@
 @endsection
 @section('js')
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+        $(function () {
+
+           $('.resume_is_active').change(function () {
+               check = $(this).prop("checked");
+               $.get("{{route('resume.isActive')}}",{check:check},function (data) {
+                   console.log(data);
+               });
+           });
+        });
+
+    </script>
 
 @endsection

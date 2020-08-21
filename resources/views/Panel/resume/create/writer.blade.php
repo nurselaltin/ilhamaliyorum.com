@@ -9,11 +9,11 @@
                 @csrf
                 <div class="form-group">
                     <label>Ad Soyad</label>
-                    <input type="text" name="fullname" class="form-control"  value="{{$member->fullname}}"required/>
+                    <input type="text" name="fullname" class="form-control"  value="{{$writer->fullname}}" required/>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" class="form-control"  value="{{$member->email}}" required/>
+                    <input type="email" name="email" class="form-control"  value="{{$writer->email}}" required/>
                 </div>
                 <div class="form-group">
                     <label>Telefon</label>

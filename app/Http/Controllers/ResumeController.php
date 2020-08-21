@@ -23,17 +23,21 @@ class ResumeController extends Controller
         $projects = Project::get();
         $references = Reference::get();
         $experiences = Experience::get();
+        toastInfo('Genel bilgileriniz , özgeçmiş pasif hale getirseniz dahi yayınlanır.');
         return view('Panel.resume.index',compact('writer','educations','projects','references','experiences'));
     }
     public  function  create(){
-        $member= Member::find(1);
-        return view('Panel.resume.create.writer',compact('member'));
+
+        $writer= Writer::findOrFail(session()->get('id'));
+        return view('Panel.resume.create.writer',compact('writer'));
     }
     public  function  add(Request $request){
-
-
         
-        $writer = new Writer();
+        $writer = Writer::findOrFail(session()->get('id'));
+        //Session bilgileri değiştirirse tekrardan değiştir
+        $request->session()->put('fullname',$request->fullname);
+        $request->session()->put('email',$request->email);
+        //----------------------------------------------------
         $writer->fullname = $request->fullname;
         $writer->email = $request->email;
         $writer->phone = $request->phone;
@@ -92,10 +96,11 @@ class ResumeController extends Controller
         return redirect()->route('book');
 
     }
-    public  function  switch(Request $request){
-        $writer = Book::find($request->id);
-        $writer->is_active = $request->isActive == "true" ? 1: 0;
+    public  function  isActive(Request $request){
+        $writer = Writer::find(1);
+        $writer->is_active = $request->check == "true" ? 1: 0;
         $writer->save();
+
 
     }
 
@@ -250,6 +255,53 @@ class ResumeController extends Controller
 
         Project::findOrFail($request->id)->delete();
         toastr()->success('Projeniz başarıyla silindi');
+        return redirect()->back();
+    }
+
+    //Reference
+    public  function createReference(){
+
+        $references = Reference::get();
+        return view('Panel.resume.create.reference',compact('references'));
+    }
+
+    public  function addReference(Request $request){
+
+
+        $reference = new Reference();
+        $reference->fullname = $request->reference_fullname;
+        $reference->email = $request->email;
+        $reference->phone = $request->phone;
+        $reference->comment_about_writer = $request->comment_about_writer;
+        $reference->writer_id= 4;
+        $reference->isActive= 1;
+        $reference->save();
+        toastr()->success('Referansınız başarıyla eklendi.');
+        return redirect()->back();
+    }
+
+    public function  getDataReference(Request $request){
+        $reference= Reference::findOrFail($request->id);
+        return response()->json($reference);
+    }
+
+    public  function  updateReference(Request $request){
+
+
+        $reference = Reference::findOrFail($request->id);
+        $reference->fullname = $request->reference_fullname;
+        $reference->email = $request->email;
+        $reference->phone = $request->phone;
+        $reference->comment_about_writer = $request->comment_about_writer;
+        $reference->save();
+        toastr()->success('Referansınız başarıyla güncellendi.');
+        return redirect()->back();
+    }
+
+    public  function  deleteReference(Request $request){
+
+        Reference::findOrFail($request->id)->delete();
+        toastr()->success('Referansınız başarıyla silindi');
         return redirect()->back();
     }
 
