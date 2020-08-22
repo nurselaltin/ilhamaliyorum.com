@@ -16,7 +16,7 @@
                     <select name="category" class="form-control" required>
                         <option value="">Seçim Yapınız</option>
                         @foreach($categories as $category )
-                            <option @if($blog->$category == $category->id) selected @endif value="{{$category->id}}">{{$category->title}}</option>
+                            <option @if($blog->category == $category->id) selected @endif value="{{$category->id}}">{{$category->title}}</option>
                         @endforeach
                     </select>
                 </div>

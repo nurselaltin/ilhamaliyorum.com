@@ -69,6 +69,17 @@ class MemberController extends Controller
             if(Hash::check($request->password,$member->password)){
 
                  toastr()->success('Hoşgeldin '.$member->fullname);
+                 //Kullanıcı bilgilerini sessiona kaydet.
+                 session()->put('fullname',$member->fullname);
+                 session()->put('email',$member->email);
+
+                $writer = Writer::where('email',session()->get('email'))->first();
+                /*Kitap,yazı,video eklerken writer a ait id üzerinden kayıt yapacağız.
+                  Bu yüzden id sessiona kayıt ediyoruz.
+                */
+                session()->put('id',$writer->id);
+
+
                  return redirect()->route('dashboard');
             }else{
 

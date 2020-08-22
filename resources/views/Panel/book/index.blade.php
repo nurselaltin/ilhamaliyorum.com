@@ -5,7 +5,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><span> </span>
+            <h6 class="m-0 font-weight-bold text-primary"><span>@if($books->count()== null) 0 @else {{$books->count()}} @endif  kitap öneriniz bulundu</span>
+                <a href="{{route('create.book')}}" class="btn btn-success btn-sm ml-3"><i class="fa fa-add">Yeni Ekle</i></a>
             </h6>
         </div>
         <div class="card-body">

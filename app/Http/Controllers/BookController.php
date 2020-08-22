@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Education;
+use App\Models\Writer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -15,9 +16,7 @@ class BookController extends Controller
 
     public  function  index(){
 
-        $books = Book::get();
-
-
+        $books = Book::where('writer_id',session()->get('id'))->get();
         return view('Panel.book.index',compact('books'));
     }
 
@@ -30,13 +29,16 @@ class BookController extends Controller
     public  function  add(Request $request){
 
 
-
+         /* Sessionda kayıtlı kullanıcı bilgilerinin writer tablosunu getiriyoruz.
+            Book tablosuna , kitabın bilgileri ile kullanıcı bilgilerinide kaydediyoruz
+          */
+         $writer = Writer::where('id',session()->get('id'))->first();
          $book = new Book();
-         $book->writer_id = 4;
+         $book->writer_id = $writer->id;
+         $book->writer_fullname = $writer->fullname;
          $book->title = $request->title;
          $book->url = Str::slug(strtolower($request->title),'-');
          $book->description = $request->description;
-         $book->writer_fullname = $request->writer;
          $book->category= $request->category;
          $book->is_active= 1;
          $book->public= 1;

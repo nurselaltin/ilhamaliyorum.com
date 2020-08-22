@@ -74,9 +74,9 @@
                        App/Helpers.php ;  isResumeFill() metodu ile özgeçmiş oluşturulmuş mu onu kontrol ediyoruz.
                     -->
                     <?php if(isResumeFill(session()->get('email') === 1)){?>
-                        <a class="collapse-item" href="{{route('create.resume')}}">Ekle</a>
+                    <a class="collapse-item" href="{{route('create.resume')}}">Ekle</a>
                     <?php }else{?>
-                        <a class="collapse-item" href="{{route('resume')}}">Görüntüle</a>
+                    <a class="collapse-item" href="{{route('resume')}}">Görüntüle</a>
                     <?php }?>
 
 
@@ -93,13 +93,8 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-
-
-                    <?php if(isResumeFill(session()->get('email'))!= true){?>
-                        <a class="collapse-item" href="{{route('blog')}}">Görüntüle</a>
-                    <?php }else{?>
                         <a class="collapse-item" href="{{route('create.blog')}}">Ekle</a>
-                        <?php }?>
+                        <a class="collapse-item" href="{{route('blog')}}">Görüntüle</a>
                 </div>
             </div>
         </li>
@@ -300,7 +295,7 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{session()->get('fullname')}}</span>
                             <img class="img-profile rounded-circle" src="{{asset('uploads/resume/default-profil.png')}}">
                         </a>
                         <!-- Dropdown - User Information -->

@@ -62,8 +62,13 @@
     </div><!-- /.modal -->
     <div class="card-body">
         <div class="table-responsive">
-            <div>
-                <input  class="resume_is_active text-right" type="checkbox"  @if($writer->is_active == 1) checked @endif  data-on="Yayında"   book-id="{{$writer->id}}"  data-off="Pasif"  data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-class="fast"/>
+            <div class="row">
+                <div class="col-md-2">
+                    <input  class="resume_is_active text-right" type="checkbox"  @if($writer->is_active == 1) checked @endif  data-on="Yayında"   book-id="{{$writer->id}}"  data-off="Pasif"  data-toggle="toggle" data-onstyle="success" data-offstyle="warning" data-class="fast"/>
+                </div>
+                <div class="col-offset-6 col-md-12  font-weight-bold text-primary text-center m-3">
+                    <a  href="{{route('edit.writer')}}" class="education badge badge-success col-md-1" >Güncelle</a>
+                </div>
             </div>
             <div class="text-center mb-4">
                 <img src="{{$writer->img_url}}" class="rounded-circle" width="200px" height="200px" alt="...">
@@ -107,7 +112,7 @@
                 <div class="card-header py-3">
                     <div class="row">
                         <h6 class="m-0 font-weight-bold text-primary col-lg-2">EĞİTİM</h6>
-                        <a  href="{{route('create.education')}}" class="education badge badge-success col-md-1" >Ekle</a>
+                        <a  href="{{route('create.education')}}" class="education badge badge-success col-md-1" >Ekle ve Güncelle</a>
 
                     </div>
 
@@ -140,7 +145,7 @@
                 <div class="card-header py-3">
                     <div class="row">
                         <h6 class="m-0 font-weight-bold text-primary col-lg-2">DENEYİM</h6>
-                        <a  href="{{route('create.experience')}}" class="badge badge-success col-md-1">Ekle</a>
+                        <a  href="{{route('create.experience')}}" class="badge badge-success col-md-1">Ekle ve Güncelle</a>
                     </div>
                 </div>
                 <div class="card-body row">
@@ -172,7 +177,7 @@
                 <div class="card-header py-3">
                     <div class="row">
                         <h6 class="m-0 font-weight-bold text-primary col-lg-2">PROJELERİM</h6>
-                        <a  href="{{route('create.project')}}" class="badge badge-success col-md-1">Ekle</a>
+                        <a  href="{{route('create.project')}}" class="badge badge-success col-md-1">Ekle ve Güncelle</a>
                     </div>
                 </div>
                 <div class="card-body row">
@@ -202,7 +207,7 @@
                 <div class="card-header py-3">
                     <div class="row">
                         <h6 class="m-0 font-weight-bold text-primary col-lg-2">REFERANSLARIM</h6>
-                        <a href="{{route('create.reference')}}" class="badge badge-success col-md-1">Ekle</a>
+                        <a href="{{route('create.reference')}}" class="badge badge-success col-md-1">Ekle ve Güncelle</a>
                     </div>
                 </div>
                 <div class="card-body row">

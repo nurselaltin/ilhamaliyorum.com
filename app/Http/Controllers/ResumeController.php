@@ -18,7 +18,12 @@ class ResumeController extends Controller
     //Resume
     public  function  index(){
 
-        $writer = Writer::find(1);
+        $writer = Writer::where('email',session()->get('email'))->first();
+        /*Kitap,yazı,video eklerken writer a ait id üzerinden kayıt yapacağız.
+          Bu yüzden id sessiona kayıt ediyoruz.
+        */
+        session()->put('id',$writer->id);
+
         $educations = Education::get();
         $projects = Project::get();
         $references = Reference::get();
@@ -28,13 +33,17 @@ class ResumeController extends Controller
     }
     public  function  create(){
 
-        $writer= Writer::findOrFail(session()->get('id'));
+        /*Kullanıcı kayıt olunca boş bir özgeçmişte oluşturmuştuk.
+        Sessionda kayıtlı kullanıcıya ait özgeçmiş bilgilerini getiriyoruz.
+
+        */
+        $writer = Writer::where('email',session()->get('email'))->first();
         return view('Panel.resume.create.writer',compact('writer'));
     }
     public  function  add(Request $request){
-        
-        $writer = Writer::findOrFail(session()->get('id'));
-        //Session bilgileri değiştirirse tekrardan değiştir
+
+        $writer = Writer::where('email',session()->get('email'))->first();
+        //Adını ve emailini değiştirirse sessiona kayıtlı bilgileride değiştiriyotuz.
         $request->session()->put('fullname',$request->fullname);
         $request->session()->put('email',$request->email);
         //----------------------------------------------------
@@ -62,38 +71,41 @@ class ResumeController extends Controller
 
         $writer->save();
         toastr()->success('Bilgileriniz başarıyla kaydedildi.');
-        return redirect()->route('dashboard');
+        return redirect()->route('resume');
 
     }
-    public  function  edit($id){
-
-        $writer = Book::findOrFail($id);
-        $categories = Category::whereIsActive(1)->get();
-        return view('Panel.book.update',compact('book','categories'));
+    public  function  edit(){
+        $writer = Writer::where('email',session()->get('email'))->first();
+        return view('Panel.resume.update_writer',compact('writer'));
 
     }
-    public  function  update(Request $request,$id){
+    public  function  update(Request $request){
 
-        $writer = Book::findOrFail($id);
-        $category=Category::findOrFail($request->category);
+        $writer = Writer::where('email',session()->get('email'))->first();
+        //Adını ve emailini değiştirme ihtimaline karşılık sessiona kayıtlı bilgileride değiştiriyoruz.
+        $request->session()->put('fullname',$request->fullname);
+        $request->session()->put('email',$request->email);
+        //----------------------------------------------------
 
-        $writer->title = $request->title;
-        $writer->url = Str::slug(strtolower($request->title),'-');
-        $writer->description = $request->description;
-        $writer->writer_fullname = $request->writer;
-        $writer->category= $category->title;
+        $writer->fullname = $request->fullname;
+        $writer->email = $request->email;
+        $writer->phone = $request->phone;
+        $writer->address = $request->address;
+        $writer->birthday = $request->birthday;
+        $writer->goals_writer = $request->goals_writer;
+        $writer->about_writer = $request->about_writer;
 
         if($request->hasFile('image')){
             //resim adını düzenle
             $imageName = Str::slug($request->title,'-').'.'.$request->image->getClientOriginalExtension();
             //Resimi klasöre kaydet
-            $request->image->move(public_path('uploads/book'),$imageName);
+            $request->image->move(public_path('uploads/resume'),$imageName);
             //veritabanına kaydet
-            $writer->img_url='uploads/book/'.$imageName;
+            $writer->img_url='uploads/resume/'.$imageName;
         }
         $writer->save();
-        toastr()->success('Kitap başarıyla güncellendi.');
-        return redirect()->route('book');
+        toastr()->success('Genel bilgileriniz başarıyla güncellendi.');
+        return redirect()->route('resume');
 
     }
     public  function  isActive(Request $request){
