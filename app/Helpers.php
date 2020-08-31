@@ -1,16 +1,17 @@
 <?php
 
-function isResumeFill($email){
+function isResumeFill(){
 
+    $writer =  \App\Models\Writer::find(session()->get('id'));
 
-    $writers =  \App\Models\Writer::where('email','=',$email)->get();
-     foreach ($writers as $writer){
-         //Bu bilgileri girmemişse daha özgeçmiş oluşturmamış
-         if($writer->address == null && $writer->birthday == null){
-             //id de sessiona kaydedelim
-             session()->put('id',$writer->id);
-             return true;
-         }
-     }
-     return false;
+    //Bu bilgileri girmemişse daha özgeçmiş oluşturmamış.
+
+        if($writer->address == null & $writer->birthday== null){
+            return true;
+        }
+
 }
+
+
+
+

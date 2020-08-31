@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Blog;
 use App\Models\Education;
 use App\Models\Writer;
 use Illuminate\Http\Request;
@@ -19,13 +20,11 @@ class BookController extends Controller
         $books = Book::where('writer_id',session()->get('id'))->get();
         return view('Panel.book.index',compact('books'));
     }
-
     public  function  create(){
 
         $categories = Category::whereIsActive(1)->get();
         return view('Panel.book.create',compact('categories'));
     }
-
     public  function  add(Request $request){
 
 
@@ -57,7 +56,6 @@ class BookController extends Controller
          return redirect()->route('book');
 
     }
-
     public  function  edit($id){
 
         $book = Book::findOrFail($id);
@@ -89,10 +87,18 @@ class BookController extends Controller
         return redirect()->route('book');
 
     }
-     public  function  switch(Request $request){
+    public  function  switch(Request $request){
         $book = Book::find($request->id);
         $book->is_active = $request->isActive == "true" ? 1: 0;
         $book->save();
+
+    }
+    public function deleteBook(Request $request){
+
+        $book = Book::find($request->id);
+        $book->delete();
+        toastr()->success('Kitap başarıyla silindi.');
+        return redirect()->route('book');
 
     }
 }

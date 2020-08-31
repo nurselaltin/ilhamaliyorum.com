@@ -42,7 +42,7 @@
                             <td>
                                 <a target="_blank" href=""  title="Görüntüle" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
                                 <a href="{{route('edit.book',$book->id)}}" title="Düzenle" class="btn btn-sm btn-primary"><i class="fa fa-pen"></i></a>
-                                <a book-id="{{$book->id}}" book-title="{{$book->title}}"  class="btn btn-sm btn-danger text-white remove-click" title="Kitabı Sil"><i class="fa fa-times"></i></a>
+                                <a book-id="{{$book->id}}" book-title="{{$book->title}}"  class="btn btn-sm btn-danger text-white delete-book" title="Kitabı Sil" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -51,22 +51,27 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="removeModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                <form method="post" action="{{route('delete.book')}}" >
+                    @csrf
+                    <input type="hidden" id ="book-id" name="id">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> SİLME İŞLEMİ</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Kitap önerinizi kalıcı olarak silmek istediğinize emin misiniz?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-danger">Sil</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -87,9 +92,9 @@
               });
 
           });
-          $('.remove-click').click(function () {
-               $('#removeModal').modal();
-
+          $('.delete-book').click(function () {
+              id = $(this)[0].getAttribute('book-id');
+              $('#book-id').val(id);
           });
       })
     </script>

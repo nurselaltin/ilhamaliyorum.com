@@ -49,6 +49,7 @@
                     'height':300
                 }
             );
+            $("#editor").code().replace(/<\/?[^>]+(>|$)/g, "")
         });
     </script>
 

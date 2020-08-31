@@ -13,6 +13,8 @@ class DashboardController extends Controller
 
     public  function  index(){
 
+
+
         $books = Book::where('writer_id',session()->get('id'))->get();
         $videos = Video::where('writer_id',session()->get('id'))->get();
         $blogs=Blog::where('writer_id',session()->get('id'))->get();

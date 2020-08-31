@@ -9,15 +9,15 @@
                 @csrf
                 <div class="form-group">
                     <label>Ad Soyad</label>
-                    <input type="text" name="fullname" class="form-control"  value="{{$writer->fullname}}" required/>
+                    <input type="text" name="fullname" class="form-control"  value="{{$member->fullname}}" readonly>
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" class="form-control"  value="{{$writer->email}}" required/>
+                    <input type="email" name="email" class="form-control"  value="{{$member->email}}"  readonly>
                 </div>
                 <div class="form-group">
                     <label>Telefon</label>
-                    <input type="phone" name="phone" class="form-control" />
+                    <input type="phone" name="phone" class="form-control" >
                 </div>
                 <div class="alert alert-danger">
                     <span>İl-ilçe şeklinde yazınız</span>
@@ -46,7 +46,7 @@
                     <textarea name="goals_writer"  id="editor" class="form-control"  rows="5"></textarea>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block"> Kitap Oluştur</button>
+                    <button type="submit" class="btn btn-primary btn-block"> Özgeçmiş Oluştur</button>
                 </div>
             </form>
         </div>

@@ -41,11 +41,10 @@ class MemberController extends Controller
             $member->isActive=1;
             $member->password=Hash::make($request->password);
             $member->save();
-            //Kullanıcı bilgilerini sessiona kaydet
-            $request->session()->put('fullname',$request->fullname);
-            $request->session()->put('email',$request->email);
+
             //------------------------------------------------------
-            //Writer tablosuna da kaydet
+            //Writer tablosuna da kayıt edelim ki default bir özgeçmiş olsun elimizde.Kullanıcı eğer blog,video,kitap eklemek isterse  writer tablosuna kaydettiğimiz
+            //lazım olacak.
             $writer = new Writer();
             $writer->fullname = $request->fullname;
             $writer->email = $request->email;
@@ -65,7 +64,7 @@ class MemberController extends Controller
         //Kontrol et
         $member = Member::whereEmail($request->email)->first();
         $message='';
-        if($member){
+        if(Auth::attempt(['email' => $request->email, 'password' =>$request->password])){
             if(Hash::check($request->password,$member->password)){
 
                  toastr()->success('Hoşgeldin '.$member->fullname);
@@ -73,12 +72,11 @@ class MemberController extends Controller
                  session()->put('fullname',$member->fullname);
                  session()->put('email',$member->email);
 
-                $writer = Writer::where('email',session()->get('email'))->first();
+                 $writer = Writer::where('email',$member->email)->first();
                 /*Kitap,yazı,video eklerken writer a ait id üzerinden kayıt yapacağız.
                   Bu yüzden id sessiona kayıt ediyoruz.
                 */
                 session()->put('id',$writer->id);
-
 
                  return redirect()->route('dashboard');
             }else{
@@ -95,6 +93,11 @@ class MemberController extends Controller
 
 
 
+    }
+
+    public  function  logout(){
+        Auth::logout();
+        return redirect()->route('login.page');
     }
 
 

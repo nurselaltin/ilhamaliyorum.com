@@ -55,7 +55,7 @@
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Videolar</div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">2</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@if($videos->count()== null) 0 @else {{$videos->count()}} @endif</div>
                                     </div>
                                 </div>
                             </div>

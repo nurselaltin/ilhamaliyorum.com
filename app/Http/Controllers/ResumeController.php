@@ -15,40 +15,30 @@ use Illuminate\Support\Str;
 
 class ResumeController extends Controller
 {
+
     //Resume
     public  function  index(){
 
-        $writer = Writer::where('email',session()->get('email'))->first();
-        /*Kitap,yazı,video eklerken writer a ait id üzerinden kayıt yapacağız.
-          Bu yüzden id sessiona kayıt ediyoruz.
-        */
-        session()->put('id',$writer->id);
 
-        $educations = Education::get();
-        $projects = Project::get();
-        $references = Reference::get();
-        $experiences = Experience::get();
+        $writer_id = session()->get('id');
+        $writer = Writer::find($writer_id);
+        $educations = Education::where('writer_id','=',$writer_id)->get();
+        $projects = Project::where('writer_id','=',$writer_id)->get();
+        $references = Reference::where('writer_id','=',$writer_id)->get();
+        $experiences = Experience::where('writer_id','=',$writer_id)->get();
         toastInfo('Genel bilgileriniz , özgeçmiş pasif hale getirseniz dahi yayınlanır.');
         return view('Panel.resume.index',compact('writer','educations','projects','references','experiences'));
     }
     public  function  create(){
-
-        /*Kullanıcı kayıt olunca boş bir özgeçmişte oluşturmuştuk.
-        Sessionda kayıtlı kullanıcıya ait özgeçmiş bilgilerini getiriyoruz.
-
-        */
-        $writer = Writer::where('email',session()->get('email'))->first();
-        return view('Panel.resume.create.writer',compact('writer'));
+        //Adını ve email i zaten kayıt olurken almıştık.Tekrardan girmemesi için member tablosundan bu bilgileri çekelim
+        $member = Member::where('email',session()->get('email'))->first();
+        return view('Panel.resume.create.writer',compact('member'));
     }
     public  function  add(Request $request){
 
         $writer = Writer::where('email',session()->get('email'))->first();
-        //Adını ve emailini değiştirirse sessiona kayıtlı bilgileride değiştiriyotuz.
-        $request->session()->put('fullname',$request->fullname);
-        $request->session()->put('email',$request->email);
-        //----------------------------------------------------
-        $writer->fullname = $request->fullname;
-        $writer->email = $request->email;
+        $writer->fullname = session()->get('fullname');
+        $writer->email = session()->get('email');
         $writer->phone = $request->phone;
         $writer->address = $request->address;
         $writer->birthday = $request->birthday;
@@ -121,7 +111,9 @@ class ResumeController extends Controller
 
     public  function createEducation(){
 
-        $educations = Education::get();
+
+        $educations = Education::where('writer_id','=',session()->get('id'))->get();
+
         return view('Panel.resume.create.education',compact('educations'));
     }
 
@@ -129,8 +121,8 @@ class ResumeController extends Controller
 
         $education = new Education();
         $education->school_name = $request->name;
-        $education->writer_id= 4;
-        $education->writer_fullname= 'Nursel';
+        $education->writer_id= session()->get('id');
+        $education->writer_fullname= session()->get('fullname');
         $education->continues= 'Devam';
         $education->department = $request->department;
         $education->education_type = $request->type;
@@ -174,7 +166,7 @@ class ResumeController extends Controller
 
     public  function createExperience(){
 
-        $experiences = Experience::get();
+        $experiences = Experience::where('writer_id','=',session()->get('id'))->get();
         return view('Panel.resume.create.experience',compact('experiences'));
     }
 
@@ -184,8 +176,8 @@ class ResumeController extends Controller
         $experience->company_name = $request->name;
         $experience->company_sector = $request->sector;
         $experience->job_title = $request->job_title;
-        $experience->writer_id= 4;
-        $experience->fullname= 'Nursel';
+        $experience->writer_id= session()->get('id');
+        $experience->fullname= session()->get('fullname');
         $experience->continues= 'Devam';
         $experience->start_date = $request->start_date;
         $experience->finish_date = $request->finish_date ;
@@ -228,7 +220,7 @@ class ResumeController extends Controller
 
     public  function createProject(){
 
-        $projects = Project::get();
+        $projects = Project::where('writer_id','=',session()->get('id'))->get();
         return view('Panel.resume.create.project',compact('projects'));
     }
 
@@ -239,8 +231,8 @@ class ResumeController extends Controller
         $project->description = $request->description;
         $project->category = $request->category;
         $project->project_img_url = 'öflf';
-        $project->writer_id= 4;
-        $project->fullname= 'Nursel';
+        $project->writer_id= session()->get('id');
+        $project->fullname= session()->get('fullname');
         $project->created_at = $request->created_at;
         $project->save();
         toastr()->success('Projeniz başarıyla eklendi.');
@@ -273,7 +265,7 @@ class ResumeController extends Controller
     //Reference
     public  function createReference(){
 
-        $references = Reference::get();
+        $references = Reference::where('writer_id','=',session()->get('id'))->get();
         return view('Panel.resume.create.reference',compact('references'));
     }
 
@@ -285,7 +277,7 @@ class ResumeController extends Controller
         $reference->email = $request->email;
         $reference->phone = $request->phone;
         $reference->comment_about_writer = $request->comment_about_writer;
-        $reference->writer_id= 4;
+        $reference->writer_id= session()->get('id');
         $reference->isActive= 1;
         $reference->save();
         toastr()->success('Referansınız başarıyla eklendi.');

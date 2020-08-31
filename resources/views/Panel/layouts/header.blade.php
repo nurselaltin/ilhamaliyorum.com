@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,13 +74,11 @@
                     <!--
                        App/Helpers.php ;  isResumeFill() metodu ile özgeçmiş oluşturulmuş mu onu kontrol ediyoruz.
                     -->
-                    <?php if(isResumeFill(session()->get('email') === 1)){?>
+                    <?php if(isResumeFill()){?>
                     <a class="collapse-item" href="{{route('create.resume')}}">Ekle</a>
                     <?php }else{?>
                     <a class="collapse-item" href="{{route('resume')}}">Görüntüle</a>
                     <?php }?>
-
-
 
                 </div>
             </div>
@@ -313,7 +312,7 @@
                                 Activity Log
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <a class="dropdown-item" href="{{route('login.out')}}" >
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
