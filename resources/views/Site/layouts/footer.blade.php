@@ -6,27 +6,69 @@
         <div class="container">
             <div class="footer-inner">
                 <div class="row">
+                    <div class="col-lg-3">
+                        <div class="footer-content">
+                            <h2 class="title">HAKKIMIZDA</h2>
+                            <div class="separator-2"></div>
+                            <p>Sürekli bir öğrenme ve okuma halinde olma ,öğrendiklerini paylaşma , kendi yolunu bulmaya çalışırken yanı başındaki insanada kendi yolunu bulmasında yardım etme arzu ve isteğiyle... <a href="">Daha Fazla<i class="fa fa-long-arrow-right pl-1"></i></a></p>
+                            <div class="separator-2"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="footer-content">
+                            <h2 class="title">EN SON YAZILAR</h2>
+                            <div class="separator-2"></div>
+                            <?php $sayac=0;
+                            $blogs = get_blogs();
+                            ?>
 
-                    dssf
+                            @foreach($blogs as $blog)
+                            @if($sayac!=2)
+                            <div class="media margin-clear">
+                                <div class="d-flex pr-2">
+                                    <div class="overlay-container">
+                                        <img class="media-object" src="{{$blog->img_url}}" alt="blog-thumb">
+                                    </div>
+                                </div>
+                                <div class="media-body">
+                                    <h6 class="media-heading"><a href="{{route('blog.post',[Str::slug($blog->url,'-'),$blog->id])}}">{{$blog->title}}</a></h6>
+
+                                    <p class="small margin-clear"><i class="fa fa-calendar pr-10"></i>{{$blog->created_at}}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <?php $sayac++;?>
+                            @endif
+                            @endforeach
+                            <div class="text-right space-top">
+                                <a href="{{route('blogs')}}" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>Daha Fazla</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="footer-content">
                             <h2 class="title">YENİ KİTAP ÖNERİLERİ</h2>
                             <div class="separator-2"></div>
                             <div class="row grid-space-10">
-
-                                <div class="col-4 col-lg-6">
-                                    <div class="overlay-container mb-10">
-                                        <img src="" alt="">
-                                        <a href="" class="overlay-link small">
-                                            <i class="fa fa-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
+                                <?php $sayac=0;
+                                $books = get_books();
+                                ?>
+                                @foreach($books as $book)
+                                    @if($sayac!=6))
+                                        <div class="col-4 col-lg-6">
+                                            <div class="overlay-container mb-10">
+                                                <img src="{{$book->img_url}}" alt="">
+                                                <a href="{{route('book.single',[$book->url,$book->id])}}" class="overlay-link small">
+                                                    <i class="fa fa-link"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <?php $sayac++;?>
+                                    @endif
+                               @endforeach
                             </div>
                             <div class="text-right space-top">
-                                <a href="" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>Daha Fazla</a>
+                                <a href="{{route('books')}}" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>Daha Fazla</a>
                             </div>
                         </div>
                     </div>
@@ -61,7 +103,7 @@
             <div class="subfooter-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="text-center">Copyright © 2020 ilhamaliyorum.com by  <a target="_blank" href="/">Nursel ALTIN</a>.</p>
+                        <p class="text-center">Copyright © 2020 ilhamaliyorum.com by  <a target="_blank" href="">Nursel ALTIN</a>.</p>
                     </div>
                 </div>
             </div>

@@ -32,8 +32,8 @@
                                       <span class="day">{{$blog->created_at->diffForHumans()}}</span>
                                     </span>
 
-                                    <span class="submitted"><i class="icon-user-1"></i><a href="#">{{$blog->writer_full_name}}</a></span>
-                                <!-- <span class="comments"><i class="icon-chat"></i> <a href="#">{{$blog->views}} görüntüleme</a></span>-->
+                                    <span class="submitted"><i class="icon-user-1"></i><a href="#">{{$blog->writer_fullname}}</a></span>
+                                    <span class="comments"><i class="icon-eye"></i> <a href="#">{{$blog->views}} görüntüleme</a></span>
                                 </div>
                             </header>
                             <div class="blogpost-content">
@@ -70,10 +70,6 @@
 
                         <!-- blogpost end -->
 
-
-
-
-
                     </div>
                     <!-- main end -->
 
@@ -84,7 +80,7 @@
                             <div class="block clearfix ">
 
                                 <a href="{{$writer->img_url}}" alt="Jane Doe" title="Jane Doe" class="img-circle"></a>
-                                <h3 class="title" style="margin-top: 30px">{{ $blog->writer_full_name}} kimdir?</h3>
+                                <h3 class="title" style="margin-top: 30px">{{$blog->writer_fullname}} kimdir?</h3>
                                 <div class="separator-2"></div>
                                 <!--  <blockquote class="margin-clear">
                                     <p>Design is not just what it looks like and feels like. Design is how it works.</p>

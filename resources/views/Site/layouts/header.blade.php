@@ -30,10 +30,10 @@
                         <div class="header-top-dropdown text-right">
 
                             <div class="btn-group">
-                                <a href="" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Kayıt Ol</a>
+                                <a href="{{route('register.view')}}" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Kayıt Ol</a>
                             </div>
                             <div class="btn-group">
-                                <a href="" id="header-top-drop-2" type="button"  class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret"  aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i>Giriş</a>
+                                <a href="{{route('login.page')}}" id="header-top-drop-2" type="button"  class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret"  aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i>Giriş</a>
                             </div>
                         </div>
                     </div>
@@ -104,23 +104,23 @@
 
                                             <!-- mega-menu start -->
                                             <li class="  mega-menu">
-                                                <a href="" class="dropdown-toggle" >Ana Sayfa</a>
+                                                <a href="{{route('home')}}" class="dropdown-toggle" >Ana Sayfa</a>
 
                                             </li>
                                             <!-- mega-menu end -->
                                             <!-- mega-menu start -->
                                             <li class="  mega-menu">
-                                                <a href="" class="dropdown-toggle" >Yazılar</a>
+                                                <a href="{{route('blogs')}}" class="dropdown-toggle" >Yazılar</a>
 
                                             </li>
                                             <!-- mega-menu end -->
                                             <li class="mega-menu">
-                                                <a href="">Youtube Video Önerileri</a>
+                                                <a href="{{route('videos')}}">Youtube Video Önerileri</a>
 
                                             </li>
                                             <!-- mega-menu start -->
                                             <li class=" mega-menu narrow">
-                                                <a href="">Kitap Önerileri</a>
+                                                <a href="{{route('books')}}">Kitap Önerileri</a>
 
                                             </li>
                                             <!-- mega-menu end -->

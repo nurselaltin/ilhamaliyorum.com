@@ -37,7 +37,7 @@
 
                                         </div>
                                         <header>
-                                            <h2><a href="{{route('blog.post',[$blog->writer_id,$blog->id])}}">{{$blog->title}}</a></h2>
+                                            <h2><a href="{{route('blog.post',[Str::slug($blog->url,'-'),$blog->id])}}">{{$blog->title}}</a></h2>
                                             <div class="post-info">
                                             <span class="post-date">
                                               <i class="icon-calendar"></i>
