@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="overlay-container">
-                                    <img src="{{$book->img_url}}" alt="">
+                                    <img src="{{asset($book->img_url)}}" alt="">
                                     <div class="overlay-to-top">
                                         <p class="small margin-clear"></p>
                                     </div>

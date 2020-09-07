@@ -36,7 +36,7 @@
 
                               </div>
                               <header>
-                                 <h2><a href="{{route('blog.post',[Str::slug($blog->url,'-'),$blog->id])}}">{{$blog->title}}</a></h2>
+                                 <h2><a href="{{route('blog.post',[$blog->url,$blog->id])}}">{{$blog->title}}</a></h2>
                                  <div class="post-info">
                                             <span class="post-date">
                                               <i class="icon-calendar"></i>
@@ -52,8 +52,8 @@
                               </div>
                               <footer class="clearfix">
                                  <div class="tags pull-left"><i class="icon-tags"></i>
-                                    <a>{{$blog->category}}</a></div>
-                                 <div class="link pull-right"><i class="icon-link"></i><a href="">Daha Fazla Oku</a></div>
+                                    {{get_category_title($blog->category)}}</div>
+                                 <div class="link pull-right"><i class="icon-link"></i><a href="{{route('blog.post',[$blog->url,$blog->id])}}">Daha Fazla Oku</a></div>
                               </footer>
                            </article>
                            <!-- blogpost end -->
@@ -86,8 +86,8 @@
                               </div>
                               <footer class="clearfix">
                                  <div class="tags pull-left"><i class="icon-tags"></i>
-                                    <a>{{$blog->category}}</a></div>
-                                 <div class="link pull-right"><i class="icon-link"></i><a href="">Daha Fazla Oku</a></div>
+                                    {{get_category_title($blog->category)}}</div>
+                                 <div class="link pull-right"><i class="icon-link"></i><a href="{{route('blog.post',[$blog->url,$blog->id])}}">Daha Fazla Oku</a></div>
                               </footer>
                            </article>
                            <!-- blogpost end -->
@@ -97,7 +97,7 @@
                      <?php $index++;?>
                   @endforeach
 
-                  <div class="timeline-date-label "><a href="" class="btn radius-50 btn-default">Daha Fazla Yazı</a></div>
+                  <div class="timeline-date-label "><a href="{{route('blogs')}}" class="btn radius-50 btn-default">Daha Fazla Yazı</a></div>
 
                   <?php $index = 2;?>
 
@@ -123,7 +123,7 @@
                                  <div class="post-info">
                                         <span class="post-date">
                                           <i class="icon-calendar"></i>
-                                          <span class="day">{{$video->createdAt}}</span>
+                                          <span class="day">{{$video->created_at->diffForHumans()}}</span>
 
                                         </span>
                                     <span class="submitted"><a href=""><i class="icon-user-1"></i>{{$video->writer_fullname}}</a>  önerdi</span>
@@ -162,7 +162,7 @@
                                  <div class="post-info">
                                         <span class="post-date">
                                           <i class="icon-calendar"></i>
-                                          <span class="day">{{$video->createdAt}}</span>
+                                          <span class="day">{{$video->created_at->diffForHumans()}}</span>
 
                                         </span>
                                     <span class="submitted"><a href=""><i class="icon-user-1"></i>{{$video->writer_fullname}}</a>  önerdi</span>
@@ -184,7 +184,7 @@
                      @endif
                      <?php $index++;?>
                   @endforeach
-                  <div class="timeline-date-label "><a href="" class="btn radius-50 btn-default">Daha Fazla Video</a></div>
+                  <div class="timeline-date-label "><a href="{{route('videos')}}" class="btn radius-50 btn-default">Daha Fazla Video</a></div>
 
 
 

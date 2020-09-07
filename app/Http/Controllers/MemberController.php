@@ -6,6 +6,7 @@ use App\Models\Writer;
 use Dotenv\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Member;
@@ -99,6 +100,85 @@ class MemberController extends Controller
         Auth::logout();
         return redirect()->route('login.page');
     }
+
+    public  function  forgotPassword(){
+
+        return view('Panel.login.forgot-password');
+    }
+
+    public  function  isExistEmail(Request $request){
+
+      //Kullanıcı var mı önce onu kontrol et
+        $user = Member::where('email','=',$request->email)->first();
+
+        if(!$user){
+            toastr()->warning('Geçersiz email!');
+        }else{
+            //Token oluştur
+            $token = rand();
+            $user->token = $token;
+            $user->save();
+
+            //Mail hesabına token gönder.
+            Mail::send('Panel.login.reset',
+                ['user'=>$user,'token'=>$token],
+                function ($message) use($user){
+                     $message->to($user->email);
+                     $message->from('ilhamaliyorum@gmail.com');
+                     $message->subject("$user->fullname, şifrenizi resetleyin");
+                } );
+
+
+            toastr()->success('Link başarıyla email hesabınıza gönderildi!');
+
+        }
+
+        return redirect()->back();
+
+    }
+
+    public  function  userProfile(){
+
+        $writer_id = session()->get('id');
+        $writer = Writer::find($writer_id);
+        return view('Panel.user-profile.index',compact('writer'));
+    }
+
+    public function  updateProfile(Request $request){
+        //Validation işlemlerini yap
+        $request->validate([
+            'password' => 'min:6',
+            're_password' => 'same:password'
+        ]);
+
+        $user = Member::whereEmail($request->email)->first();
+        if($user){
+            $user->fullname = $request->fullname;
+            $user->email = $request->email;
+            $user->password=Hash::make($request->password);
+            $user->save();
+
+            //Writer  tablosundaki kullanıcı bilgilerinide güncelleyelim
+            $writer =Writer::find(session()->get('id'));
+            $writer->fullname = $request->fullname;
+            $writer->email = $request->email;
+            $writer->save();
+            //-----------------------------------------------------
+
+            //Kullanıcı bilgilerini sessiona kaydet.
+            session()->put('fullname',$user->fullname);
+            session()->put('email',$user->email);
+
+            toastr()->success('Bilgileriniz başarıyla güncellendi!');
+            return redirect()->route('dashboard');
+        }
+
+        toastr()->success('Şifreleriniz uyuşmuyor!');
+        return redirect()->back();
+
+    }
+
+
 
 
 

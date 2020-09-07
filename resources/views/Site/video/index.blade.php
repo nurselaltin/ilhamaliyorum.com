@@ -47,11 +47,11 @@
                                         </iframe>
                                     </div>
                                     <header>
-                                        <h2><a href="blog-post.html">{{$video->title}}</a></h2>
+                                        <h2><a href="#">{{$video->title}}</a></h2>
                                         <div class="post-info">
                                         <span class="post-date">
                                           <i class="icon-calendar"></i>
-                                          <span class="day">{{$video->createdAt}}</span>
+                                          <span class="day">{{$video->created_at->diffForHumans()}}</span>
 
                                         </span>
                                             <span class="submitted"><a href=""><i class="icon-user-1"></i>{{$video->writer_fullname}}</a>  önerdi</span>
@@ -86,11 +86,11 @@
                                         </iframe>
                                     </div>
                                     <header>
-                                        <h2><a href="blog-post.html">{{$video->title}}</a></h2>
+                                        <h2><a href="#">{{$video->title}}</a></h2>
                                         <div class="post-info">
                                         <span class="post-date">
                                           <i class="icon-calendar"></i>
-                                          <span class="day">{{$video->createdAt}}</span>
+                                          <span class="day">{{$video->created_at->diffForHumans()}}</span>
 
                                         </span>
                                             <span class="submitted"><a href=""><i class="icon-user-1"></i>{{$video->writer_fullname}}</a>  önerdi</span>

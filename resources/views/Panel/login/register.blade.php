@@ -34,7 +34,7 @@
                 <div class="col-lg-7">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Hesap Oluştur!</h1>
                         </div>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -49,22 +49,22 @@
                             @csrf
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" name="fullname" placeholder="Full Name">
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" name="fullname" placeholder="Ad Soyad">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" placeholder="Email Address">
+                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" placeholder="Email ">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="password" placeholder="Password">
+                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="password" placeholder="Şifre">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" name="re_password" placeholder="Repeat Password">
+                                    <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" name="re_password" placeholder="Şifre Tekrar">
                                 </div>
                             </div>
                             <button type="submit"  class="btn btn-primary btn-user btn-block">
-                                Register Account
+                                Kayıt Ol
                             </button>
                             <hr>
                             <!--
@@ -78,14 +78,10 @@
                             -->
                         </form>
                         <hr>
-                        <!--
                         <div class="text-center">
-                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                            <a class="small" href="{{route('login.page')}}">Hesabın mı var? Giriş Yap</a>
                         </div>
-                        <div class="text-center">
-                            <a class="small" href="login.html">Already have an account? Login!</a>
-                        </div>
-                        -->
+
                     </div>
                 </div>
             </div>

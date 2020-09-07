@@ -23,4 +23,9 @@ class HomeController extends Controller
 
         return view('Site.index',compact('blogs','videos'));
     }
+
+    public  function  aboutSite(){
+
+        return view('Site.about.index');
+    }
 }

@@ -53,7 +53,7 @@
                                         </div>
                                         <footer class="clearfix">
                                             <div class="tags pull-left"><i class="icon-tags"></i>
-                                                <a>{{$blog->category}}</a></div>
+                                                {{get_category_title($blog->category)}}</div>
                                             <div class="link pull-right"><i class="icon-link"></i><a href="">Daha Fazla Oku</a></div>
                                         </footer>
                                     </article>

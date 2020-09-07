@@ -44,7 +44,7 @@
                                         <div class="carousel-item active">
                                             <div class="overlay-container">
 
-                                                <img src="{{$blog->img_url}}" alt="">
+                                                <img src="{{asset($blog->img_url)}}" alt="">
 
                                             </div>
                                         </div>
@@ -56,7 +56,7 @@
                                 </p>
                             </div>
                             <footer class="clearfix">
-                                <div class="tags pull-left"><i class="icon-tags"></i> <a >{{$blog->category}}</a></div>
+                                <div class="tags pull-left"><i class="icon-tags"></i> {{get_category_title($blog->category)}}</div>
                                 <div class="link pull-right">
                                     <ul class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">
                                         <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>

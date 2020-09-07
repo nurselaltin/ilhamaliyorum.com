@@ -10,7 +10,7 @@
                         <div class="footer-content">
                             <h2 class="title">HAKKIMIZDA</h2>
                             <div class="separator-2"></div>
-                            <p>Sürekli bir öğrenme ve okuma halinde olma ,öğrendiklerini paylaşma , kendi yolunu bulmaya çalışırken yanı başındaki insanada kendi yolunu bulmasında yardım etme arzu ve isteğiyle... <a href="">Daha Fazla<i class="fa fa-long-arrow-right pl-1"></i></a></p>
+                            <p>Sürekli bir öğrenme ve okuma halinde olma ,öğrendiklerini paylaşma , kendi yolunu bulmaya çalışırken yanı başındaki insanada kendi yolunu bulmasında yardım etme arzu ve isteğiyle... <a href="{{route('about.site')}}">Daha Fazla<i class="fa fa-long-arrow-right pl-1"></i></a></p>
                             <div class="separator-2"></div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                             <div class="media margin-clear">
                                 <div class="d-flex pr-2">
                                     <div class="overlay-container">
-                                        <img class="media-object" src="{{$blog->img_url}}" alt="blog-thumb">
+                                        <img class="media-object" src="{{asset($blog->img_url)}}" alt="blog-thumb">
                                     </div>
                                 </div>
                                 <div class="media-body">
@@ -57,7 +57,7 @@
                                     @if($sayac!=6))
                                         <div class="col-4 col-lg-6">
                                             <div class="overlay-container mb-10">
-                                                <img src="{{$book->img_url}}" alt="">
+                                                <img src="{{asset($book->img_url)}}" alt="">
                                                 <a href="{{route('book.single',[$book->url,$book->id])}}" class="overlay-link small">
                                                     <i class="fa fa-link"></i>
                                                 </a>
