@@ -10,6 +10,8 @@
     <meta name="author" content="">
 
     <title>ilhamaliyorum.com-Panel</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{asset('SitePage')}}/images/owl.png">
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('AdminPage')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

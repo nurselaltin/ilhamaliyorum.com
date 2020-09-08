@@ -9,7 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>ilhamaliyorum.com</title>
+    <script src="https://www.google.com/recaptcha/api.js?hl=tr" async defer></script>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{asset('SitePage')}}/images/owl.png">
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('AdminPage/')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,10 +49,15 @@
                                     <div class="form-group">
                                         <input type="password" name="password"  class="form-control form-control-user" required id="exampleInputPassword" placeholder="Şifre">
                                     </div>
+                                    <hr>
+                                    <div class="g-recaptcha" name="sitekey" data-sitekey="6Lf7U8kZAAAAAChTWxyb_x47asc5_jv1CEScLi8G"></div>
+                                    <hr>
+
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Giriş
                                     </button>
                                     <hr>
+
                                 </form>
                                 <a href="{{route('register.view')}}" style="font-size: .8rem;border-radius: 10rem;padding: .75rem 1rem;" class="user btn btn-success btn-user btn-block">
                                     Kayıt Ol

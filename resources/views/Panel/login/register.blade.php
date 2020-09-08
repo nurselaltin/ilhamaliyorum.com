@@ -10,8 +10,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>ihamaliyorum.com</title>
 
+    <script src="https://www.google.com/recaptcha/api.js?hl=tr" async defer></script>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{asset('SitePage')}}/images/owl.png">
     <!-- Custom fonts for this template-->
     <link href="{{asset('AdminPage/')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="{{asset('AdminPage/')}}/https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -63,6 +66,12 @@
                                     <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" name="re_password" placeholder="Şifre Tekrar">
                                 </div>
                             </div>
+
+                            <hr>
+                            <div class="g-recaptcha" name="sitekey" data-sitekey="6Lf7U8kZAAAAAChTWxyb_x47asc5_jv1CEScLi8G"></div>
+                            <hr>
+
+
                             <button type="submit"  class="btn btn-primary btn-user btn-block">
                                 Kayıt Ol
                             </button>

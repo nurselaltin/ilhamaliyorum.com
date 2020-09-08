@@ -28,4 +28,9 @@ class HomeController extends Controller
 
         return view('Site.about.index');
     }
+
+    public  function maintenance(){
+
+        return view('Site.maintenance');
+    }
 }
